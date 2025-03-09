@@ -1,0 +1,66 @@
+<!-- <div *ngIf="!isAdminLoggedIn && !isStudentLoggedIn ">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/login">Student Manegement</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active">Sign Up</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div *ngIf="isAdminLoggedIn">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/login"> Admin LoggedIn</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/add-event" routerLinkActive="active">Add Courses</a>
+          </li>
+             <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/report" routerLinkActive="active">Report</a>
+          </li>
+               <li class="nav-item">
+            <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div *ngIf="isStudentLoggedIn ">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" routerLink="/login">STUDENT Logged In</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/singer/dashboard" routerLinkActive="active">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/singer/reuquest-change" routerLinkActive="active">Enroll URL </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<router-outlet></router-outlet> -->
