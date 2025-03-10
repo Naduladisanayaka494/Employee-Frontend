@@ -1,5 +1,7 @@
+import { DepartmentAdd } from './../../../models/deparmentadd.model';
 import { Component, OnInit } from '@angular/core';
 import { Department } from '../../../models/department.model';
+// import { DepartmentAdd } from '../../../models/deparmentadd.model';
 import { DepartmentService } from '../../../services/department/department.service';
 import Swal from 'sweetalert2'; // SweetAlert import
 
@@ -14,6 +16,15 @@ export class ReportsComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 0;
 
+  // For Add Department Modal
+  newDepartment: DepartmentAdd = {
+    name: '',
+    description: ''
+  };
+
+  // For Edit Department Modal
+  departmentToEdit: Department = { id: '', name: '', description: '' };
+
   constructor(private departmentService: DepartmentService) {}
 
   ngOnInit(): void {
@@ -27,6 +38,47 @@ export class ReportsComponent implements OnInit {
         this.departments = response.content;
         this.totalPages = response.totalPages;
       });
+  }
+
+  addDepartment(): void {
+    this.departmentService.createDepartment(this.newDepartment).subscribe(
+      (response) => {
+        this.departments.push(response);
+        this.loadDepartments();
+        Swal.fire('Success!', 'Department added successfully', 'success');
+      },
+      (error) => {
+        Swal.fire(
+          'Error!',
+          'There was an error adding the department',
+          'error'
+        );
+      }
+    );
+  }
+
+  editDepartment(id: string): void {
+    this.departmentService.getDepartmentById(id).subscribe((department) => {
+      this.departmentToEdit = { ...department };
+    });
+  }
+
+  updateDepartment(): void {
+    this.departmentService
+      .updateDepartment(this.departmentToEdit.id, this.departmentToEdit)
+      .subscribe(
+        (response) => {
+          this.loadDepartments();
+          Swal.fire('Success!', 'Department updated successfully', 'success');
+        },
+        (error) => {
+          Swal.fire(
+            'Error!',
+            'There was an error updating the department',
+            'error'
+          );
+        }
+      );
   }
 
   deleteDepartment(id: string): void {

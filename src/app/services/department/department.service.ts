@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Department } from '../../models/department.model';
+import { DepartmentAdd } from 'src/app/models/deparmentadd.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class DepartmentService {
     return this.http.get<any>(`${this.apiUrl}?page=${page}&size=${size}`);
   }
 
-  createDepartment(department: Department): Observable<Department> {
+  createDepartment(department: DepartmentAdd): Observable<Department> {
     return this.http.post<Department>(this.apiUrl, department);
   }
 
@@ -25,5 +26,9 @@ export class DepartmentService {
 
   deleteDepartment(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  getDepartmentById(id: string): Observable<Department> {
+    return this.http.get<Department>(`${this.apiUrl}/${id}`);
   }
 }
