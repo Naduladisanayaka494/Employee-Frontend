@@ -6,11 +6,11 @@ import { LoginComponent } from './auth/login/login.component';
 const routes: Routes = [
   { path: 'register', component: SignUpComponent },
   { path: 'login', component: LoginComponent },
-  // {
-  //   path: 'admin',
-  //   loadChildren: () =>
-  //     import('./modules/admin/admin.module').then((m) => m.AdminModule),
-  // },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
 
   // {
   //   path: 'singer',
