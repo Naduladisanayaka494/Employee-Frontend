@@ -21,4 +21,17 @@ export class AuthService {
   getAllUsers(): Observable<any> {
     return this.http.get(BASE_URL + '/api/auth/users');
   }
+
+  signup(userData: any, file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('name', userData.name);
+    formData.append('email', userData.email);
+    formData.append('password', userData.password);
+
+    if (file) {
+      formData.append('profilePhoto', file);
+    }
+
+    return this.http.post('http://localhost:8080/api/auth/signup', formData);
+  }
 }

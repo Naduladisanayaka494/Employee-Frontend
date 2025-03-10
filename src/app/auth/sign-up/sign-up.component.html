@@ -3,60 +3,42 @@
     <div class="text-center mb-3">
       <h2 class="fw-bold text-primary">Admin Sign Up</h2>
     </div>
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" id="signupForm" novalidate>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name" required />
+      </div>
 
-      <div class="form-group mb-3">
-        <label for="email" class="fw-semibold">E-mail</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email" required>
-        </div>
-        <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="text-danger small">
-          The input is not a valid E-mail.
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" id="email" formControlName="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password" required />
+      </div>
+
+      <div class="form-group">
+        <label for="checkPassword">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="checkPassword"
+          formControlName="checkPassword"
+          required
+        />
+        <div *ngIf="signupForm.errors?.mismatch && signupForm.get('checkPassword')?.touched" class="text-danger">
+          Passwords do not match.
         </div>
       </div>
 
-      <div class="form-group mb-3">
-        <label for="password" class="fw-semibold">Password</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-lock"></i></span>
-          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Create a password" required>
-        </div>
-        <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="text-danger small">
-          Must be 8+ characters, include upper/lowercase, number & symbol.
-        </div>
+      <div class="form-group">
+        <label for="profilePhoto">Profile Photo</label>
+        <input type="file" class="form-control" id="profilePhoto" #fileInput accept="image/*" />
       </div>
 
-      <div class="form-group mb-3">
-        <label for="checkPassword" class="fw-semibold">Confirm Password</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-          <input type="password" class="form-control" id="checkPassword" formControlName="checkPassword" placeholder="Confirm password" required>
-        </div>
-        <div *ngIf="signupForm.get('checkPassword')?.invalid && signupForm.get('checkPassword')?.touched" class="text-danger small">
-          Please confirm your password.
-        </div>
-      </div>
-
-      <div class="form-group mb-3">
-        <label for="name" class="fw-semibold">Name</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="bi bi-person"></i></span>
-          <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter your name" required>
-        </div>
-        <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="text-danger small">
-          Please input your name!
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary w-100 mt-3 fw-bold" [disabled]="signupForm.invalid">
-        <i class="bi bi-check-circle"></i> Register
-      </button>
-
-      <div class="text-center mt-3">
-        <small>Already have an account? <a href="/login" class="text-primary fw-semibold">Login Now!</a></small>
-      </div>
-
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="signupForm.invalid">Register</button>
     </form>
   </div>
 </div>

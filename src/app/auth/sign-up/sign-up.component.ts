@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-signupForm!: FormGroup;
+  signupForm!: FormGroup;
+  @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   constructor(
     private fb: FormBuilder,
@@ -19,40 +19,49 @@ signupForm!: FormGroup;
   ) {}
 
   ngOnInit(): void {
-    this.signupForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'),
+    this.signupForm = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}'),
+          ],
         ],
-      ],
-      checkPassword: ['', Validators.required],
-      name: ['', Validators.required],
+        checkPassword: ['', Validators.required],
+        name: ['', Validators.required],
+      },
+      {
+        validator: this.passwordMatchValidator, // Custom validator to check password match
+      }
+    );
+  }
+
+  passwordMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
+    const password = group.get('password')?.value;
+    const checkPassword = group.get('checkPassword')?.value;
+    return password === checkPassword ? null : { mismatch: true };
+  }
+
+  onSubmit() {
+    if (this.signupForm.invalid) {
+      return;
+    }
+
+    const formValues = this.signupForm.value;
+    const fileInput = this.fileInput.nativeElement; // Reference to the file input element
+    const file = fileInput.files[0]; // Get the selected file
+
+    this.authService.signup(formValues, file).subscribe({
+      next: (response) => {
+        console.log('Signup successful', response);
+        // Optionally, navigate to login page
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        console.error('Signup error', error);
+      },
     });
   }
-
-  onSubmit(): void {
-    if (this.signupForm.valid) {
-      const { email, password, name } = this.signupForm.value;
-      const user = { email, password, name };
-
-      this.authService.register(user).subscribe(
-        (response) => {
-          alert('Registration successful! Redirecting to login page...');
-          this.router.navigate(['/login']);
-        },
-        (error) => {
-          alert('Registration failed. Please try again.');
-          console.error('Signup failed', error);
-        }
-      );
-    } else {
-      alert('Form is invalid. Please check the fields.');
-      console.error('Form is invalid');
-    }
-  }
 }
-
-
