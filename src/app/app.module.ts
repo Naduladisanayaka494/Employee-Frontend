@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AdminModule } from './modules/admin/admin.module';
+import { EmployeeModule } from './modules/employee/employee.module';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, SignUpComponent],
@@ -22,7 +23,8 @@ import { AdminModule } from './modules/admin/admin.module';
     BrowserAnimationsModule,
     MatSnackBarModule,
     RouterModule,
-    AdminModule
+    AdminModule,
+    EmployeeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

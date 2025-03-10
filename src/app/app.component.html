@@ -31,12 +31,10 @@
             <li class="nav-item">
             <a class="nav-link" routerLink="/admin/details" routerLinkActive="active">Details</a>
           </li>
-             <!-- <li class="nav-item">
-            <a class="nav-link" routerLink="/admin/report" routerLinkActive="active">Report</a>
-          </li>
+
                <li class="nav-item">
             <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
-          </li> -->
+          </li>
 
 
         </ul>
@@ -48,15 +46,15 @@
 <div *ngIf="isStudentLoggedIn ">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/login">STUDENT Logged In</a>
+      <a class="navbar-brand" routerLink="/login">Employee Logged In</a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/singer/dashboard" routerLinkActive="active">Dashboard</a>
+            <a class="nav-link" routerLink="/employee/dashboard" routerLinkActive="active">Dashboard</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" routerLink="/singer/reuquest-change" routerLinkActive="active">Enroll URL </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
           </li>

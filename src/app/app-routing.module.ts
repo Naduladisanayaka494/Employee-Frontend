@@ -12,11 +12,11 @@ const routes: Routes = [
       import('./modules/admin/admin.module').then((m) => m.AdminModule),
   },
 
-  // {
-  //   path: 'singer',
-  //   loadChildren: () =>
-  //     import('./modules/singer/singer.module').then((m) => m.SingerModule),
-  // },
+  {
+    path: 'employee',
+    loadChildren: () =>
+      import('./modules/employee/employee.module').then((m) => m.EmployeeModule),
+  },
 ];
 
 
