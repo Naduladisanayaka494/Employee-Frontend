@@ -1,1 +1,48 @@
-<p>employee-details works!</p>
+<div class="container mt-4">
+  <h2 class="text-center">Employee Details</h2>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngFor="let user of users" class="card shadow-lg mt-4">
+    <div class="card-body text-center">
+      <img
+        *ngIf="user.profilePhotoPath"
+        [src]="'https://localhost:8080/' + user.profilePhotoPath"
+        class="rounded-circle mb-3"
+        width="150"
+        alt="Profile Photo"
+      />
+      <h4 class="text-primary">{{ user.name }}</h4>
+      <p class="text-muted">{{ user.email }}</p>
+
+      <table class="table table-bordered mt-3">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td>{{ user.id }}</td>
+          </tr>
+          <tr>
+            <th>Role</th>
+            <td>{{ user.userRole }}</td>
+          </tr>
+               <tr>
+            <th>ID</th>
+            <td>{{ user.name }}</td>
+          </tr>
+          <tr>
+            <th>Role</th>
+            <td>{{ user.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
