@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { StorageService } from '../../services/storage/storage.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +17,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private storageService: StorageService,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -33,10 +32,6 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.loginform.value).subscribe({
         next: (res) => {
           console.log(res);
-          // this.snackBar.open('Logged in successfully!', 'Close', {
-          //   duration: 3000,
-          //   panelClass: ['success-snackbar'],
-          // });
 
           if (res.userId != null) {
             const user = {
@@ -51,29 +46,36 @@ export class LoginComponent implements OnInit {
             } else if (StorageService.isEmployeeLoggedIn()) {
               this.router.navigateByUrl('employee/dashboard');
             }
+
+            // SweetAlert for successful login
+            Swal.fire({
+              title: 'Success!',
+              text: 'Logged in successfully!',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            });
           }
         },
         error: (err) => {
           console.error(err);
-          this.snackBar.open(
-            'Something went wrong. Please try again!',
-            'Close',
-            {
-              duration: 3000,
-              panelClass: ['error-snackbar'],
-            }
-          );
+
+          // SweetAlert for error
+          Swal.fire({
+            title: 'Error!',
+            text: 'Something went wrong. Please try again!',
+            icon: 'error',
+            confirmButtonText: 'Close',
+          });
         },
       });
     } else {
-      this.snackBar.open(
-        'Please fill in the required fields correctly!',
-        'Close',
-        {
-          duration: 3000,
-          panelClass: ['error-snackbar'],
-        }
-      );
+ 
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill in the required fields correctly!',
+        icon: 'warning',
+        confirmButtonText: 'Close',
+      });
     }
   }
 }
