@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
 
             if (StorageService.isAdminLoggedIn()) {
               this.router.navigateByUrl('admin/dashboard');
-            } else if (StorageService.isSingerLoggedIn()) {
-              this.router.navigateByUrl('singer/dashboard');
+            } else if (StorageService.isEmployeeLoggedIn()) {
+              this.router.navigateByUrl('employee/dashboard');
             }
           }
         },

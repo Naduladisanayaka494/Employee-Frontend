@@ -44,16 +44,16 @@ export class StorageService {
       return false;
     } else {
       const role: string = StorageService.getUserRole();
-      return role === 'ADMIN';
+      return role === 'Admin';
     }
   }
 
-  static isSingerLoggedIn(): boolean {
+  static isEmployeeLoggedIn(): boolean {
     if (StorageService.getToken() == null) {
       return false;
     } else {
       const role: string = StorageService.getUserRole();
-      return role === 'STUDENT';
+      return role === 'Employee';
     }
   }
 

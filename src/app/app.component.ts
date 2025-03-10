@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Employee-Mnegement';
-  isStudentLoggedIn: boolean = StorageService.isSingerLoggedIn();
+  isStudentLoggedIn: boolean = StorageService.isEmployeeLoggedIn();
   isAdminLoggedIn: boolean = StorageService.isAdminLoggedIn();
 
   constructor(private router: Router, private cdRef: ChangeDetectorRef) {}
@@ -17,7 +17,7 @@ export class AppComponent {
   ngOnInit() {
     this.router.events.subscribe((event) => {
       this.isAdminLoggedIn = StorageService.isAdminLoggedIn();
-      this.isStudentLoggedIn = StorageService.isSingerLoggedIn();
+      this.isStudentLoggedIn = StorageService.isEmployeeLoggedIn();
       this.cdRef.detectChanges();
     });
   }
