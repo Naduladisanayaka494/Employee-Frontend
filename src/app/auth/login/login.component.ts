@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
             StorageService.saveToken(res.jwt);
 
             if (StorageService.isAdminLoggedIn()) {
-              this.router.navigateByUrl('admin/dashboard');
+              this.router.navigateByUrl('admin/reports');
             } else if (StorageService.isEmployeeLoggedIn()) {
               this.router.navigateByUrl('employee/dashboard');
             }
@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
         },
       });
     } else {
- 
+
       Swal.fire({
         title: 'Error!',
         text: 'Please fill in the required fields correctly!',
